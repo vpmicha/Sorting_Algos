@@ -9,13 +9,16 @@ numbers = [
     90, -1, 33, 27, 72, 10, 10, 41, 64, 7,
     25, -20, 500, 14, 3, 81, 18, 0, 37, 60
 ]
+
 non_numbers = ['cat', 'dog', 'mouse', 'lion']
 
-def largest_number(numbers):
+floaters = [42.2, -7, 0, 15.5, 15, 99, -100.1, 42, 8.8, 1]
+
+def largest_number(list):
     found_number = False
-    if numbers:
-        number = -inf
-        for i in numbers:
+    if list:
+        number = list[0]
+        for i in list:
             try:
                 if i >= number:
                     number = i
@@ -32,5 +35,36 @@ def largest_number(numbers):
 
     return number
 
-print(largest_number(numbers))
+def second_largest_number(list):
+    found_number = False
+    if list:
+        largest = -inf
+        second_largest = list[0]
+        for i in list:
+            try:
+                if i > largest:
+                    second_largest = largest
+                    largest = i
+                    found_number = True
+                if second_largest < i < largest:
+                    second_largest = i
+                    
+            except TypeError:
+                print(f'List contained non number {i}')
+                continue
+
+        if second_largest == -inf:
+            return None
+
+        if not found_number:
+            return 'List did not contain any numbers'
+
+        return second_largest
+
+    else:
+        return 'Empty list'
+
+            
+
+
 
