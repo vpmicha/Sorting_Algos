@@ -1,5 +1,7 @@
 from math import inf
 import numbers
+from re import A
+from typing import Type
 
 
 numbers = [
@@ -64,7 +66,31 @@ def second_largest_number(list):
     else:
         return 'Empty list'
 
-            
+def smallest_largest(list):
+    found_number = False
+    if list:
+        largest = -inf
+        smallest = +inf
+        for i in list:
+            try:
+                if i > largest:
+                    largest = i
+                    found_number = True
+                
+                if i < smallest:
+                    smallest = i
+                    found_number = True
 
+            except TypeError:
+                print(f'List contained non number {i}')
+                continue
+
+        if not found_number:
+            return 'List did not contain any numbers'
+
+        return (smallest, largest)
+
+    else:
+        return 'Empty list'
 
 
