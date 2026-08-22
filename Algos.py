@@ -1,3 +1,5 @@
+from itertools import count
+from logging import PlaceHolder
 from math import inf
 import numbers
 from re import A
@@ -93,4 +95,17 @@ def smallest_largest(list):
     else:
         return 'Empty list'
 
+def value_count(list):
+    count_dict = {}
+    if list:
+        first_time = True
+        for number in list:
+            if number not in count_dict:
+                count_dict[number] = 1
+            elif number in count_dict:
+                count_dict[number] += 1
+    return count_dict
 
+
+
+print(value_count([4, 2, 4, 7, 2, 4]))
