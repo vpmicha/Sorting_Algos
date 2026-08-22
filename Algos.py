@@ -1,8 +1,11 @@
+from ast import Break
+from calendar import firstweekday
 from itertools import count
 from logging import PlaceHolder
 from math import inf
 import numbers
 from re import A
+from tkinter import ON
 from typing import Type
 
 
@@ -104,8 +107,41 @@ def value_count(list):
                 count_dict[number] = 1
             elif number in count_dict:
                 count_dict[number] += 1
+    else:
+        return 'Empty list'
+
     return count_dict
 
+def two_num_sum(list, target_value):
+    target = target_value
+    sum_list = list
+    if list:
+        first = list[0]
+        second = sum_list[0]
+        first_index = list.index(first)
+        first_loop_iterations = 0
+        second_loop_iterations = 0
+        while True:
+            for i in list[first_index:]:
+                first = i
+                first_loop_iterations += 1
+                break
+            for j in sum_list:
+                second = j
+                second_loop_iterations += 1
+                if first + second == target and first_loop_iterations != second_loop_iterations:
+                    return (first, second)
+            second_loop_iterations = 0
+            first_index += 1
 
+            if first_loop_iterations == len(list):
+                break
 
-print(value_count([4, 2, 4, 7, 2, 4]))
+        return 'No combination found'
+    return 'Empty list'
+
+[4, 6, 3, 6, 1, 7]                   
+[4, 6, 3, 6, 1, 7]                   
+                
+
+print(two_num_sum([4, 6, 3, 1, 1, 7], 12))
