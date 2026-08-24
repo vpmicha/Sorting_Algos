@@ -1,13 +1,4 @@
-from ast import Break
-from calendar import firstweekday
-from itertools import count
-from logging import PlaceHolder
 from math import inf
-import numbers
-from re import A
-from tkinter import ON
-from typing import Type
-
 
 numbers = [
     42, -7, 0, 15, 15, 99, -100, 3, 8, 1,
