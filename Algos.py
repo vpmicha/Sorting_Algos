@@ -104,23 +104,44 @@ def value_count(numbers):
     return count_dict
 
 def two_num_sum(numbers, target_value):
+#-----------------------Lists for checking the numbers-----------------------#
     target = target_value
     combinations = []
+    number_encounter_positive = []
+    number_encounter_negative = []
+
     if numbers:
         for number in numbers:
-            goal_number = target - number
-            if goal_number == number and numbers.count(number) > 1 and (goal_number, number) not in combinations:
-                combinations.append((goal_number, number))
-                
-            elif goal_number in numbers and (goal_number, number) not in combinations and (number, goal_number) not in combinations and goal_number != number:
-                combinations.append((goal_number, number))
+#-----------------------Dynamicaly make space for indexing difference numbers-----------------------#
+            if len(number_encounter_positive) <= abs(number) or len(number_encounter_negative) <= abs(number):
+                for _ in range(abs(number) - len(number_encounter_positive) + 1):
+                    number_encounter_positive.append(None)
+                    number_encounter_negative.append(None)
 
-            else:
-                continue
+            difference = target - number
+#-----------------------Check if list contained difference-----------------------#
+
+            try:
+                if number > target:
+                    if number_encounter_negative[abs(difference)] == difference:
+                        combinations.append((difference, number))
+                    
+                elif number <= target:
+                    if number_encounter_positive[abs(difference)] == difference:
+                        combinations.append((difference, number))
+            except IndexError:
+                pass
+#-----------------------Append number to list with encountered numbers-----------------------#
+            if number < 0:
+                number_encounter_negative[abs(number)] = number
+            elif number >= 0:
+                number_encounter_positive[number] = number
+
         if combinations:
             return combinations
         else:
             return 'No combination found'
-    return 'Empty List'
 
-print(two_num_sum([1, 4], 8))
+    return 'Empty list' 
+
+print(two_num_sum([1, 2, 1000], 3))
