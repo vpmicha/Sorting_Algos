@@ -14,7 +14,7 @@ non_numbers = ['cat', 'dog', 'mouse', 'lion']
 floaters = [42.2, -7, 0, 15.5, 15, 99, -100.1, 42, 8.8, 1]
 
 def avg_time(function):
-    reps = 1000000
+    reps = 10000
     time_taken = timeit(function, number=reps)
     return f'{round((time_taken / reps)*10**6, 2)} micro-seconds'
 
@@ -126,5 +126,6 @@ def two_num_sum(numbers, target):
             return 'No combination found'
 
     return 'Empty list'
-
-print(avg_time(lambda: two_num_sum([4, 7, 1, 9, 3, 6, 12, -2, 8], 10)))
+    
+if __name__ == '__main__':
+    print(avg_time(lambda: two_num_sum(list(range(100)), 197)))
