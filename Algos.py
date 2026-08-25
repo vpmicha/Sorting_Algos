@@ -1,4 +1,5 @@
 from math import inf
+from timeit import timeit
 
 numbers = [
     42, -7, 0, 15, 15, 99, -100, 3, 8, 1,
@@ -11,6 +12,11 @@ numbers = [
 non_numbers = ['cat', 'dog', 'mouse', 'lion']
 
 floaters = [42.2, -7, 0, 15.5, 15, 99, -100.1, 42, 8.8, 1]
+
+def avg_time(function):
+    reps = 1000000
+    time_taken = timeit(function, number=reps)
+    return f'{round((time_taken / reps)*10**6, 2)} micro-seconds'
 
 def largest_number(numbers):
     found_number = False
@@ -103,8 +109,7 @@ def value_count(numbers):
 
     return count_dict
 
-def two_num_sum(numbers, target_value):
-    target = target_value
+def two_num_sum(numbers, target):
     combinations = []
     numbers_set = set()
 
@@ -121,5 +126,5 @@ def two_num_sum(numbers, target_value):
             return 'No combination found'
 
     return 'Empty list'
-            
-print(two_num_sum([-3, 1, 2, 4, 6, 8], 5))
+
+print(avg_time(lambda: two_num_sum([4, 7, 1, 9, 3, 6, 12, -2, 8], 10)))
