@@ -104,44 +104,22 @@ def value_count(numbers):
     return count_dict
 
 def two_num_sum(numbers, target_value):
-#-----------------------Lists for checking the numbers-----------------------#
     target = target_value
     combinations = []
-    number_encounter_positive = []
-    number_encounter_negative = []
+    numbers_set = set()
 
     if numbers:
         for number in numbers:
-#-----------------------Dynamicaly make space for indexing difference numbers-----------------------#
-            if len(number_encounter_positive) <= abs(number) or len(number_encounter_negative) <= abs(number):
-                for _ in range(abs(number) - len(number_encounter_positive) + 1):
-                    number_encounter_positive.append(None)
-                    number_encounter_negative.append(None)
-
-            difference = target - number
-#-----------------------Check if list contained difference-----------------------#
-
-            try:
-                if number > target:
-                    if number_encounter_negative[abs(difference)] == difference:
-                        combinations.append((difference, number))
-                    
-                elif number <= target:
-                    if number_encounter_positive[abs(difference)] == difference:
-                        combinations.append((difference, number))
-            except IndexError:
-                pass
-#-----------------------Append number to list with encountered numbers-----------------------#
-            if number < 0:
-                number_encounter_negative[abs(number)] = number
-            elif number >= 0:
-                number_encounter_positive[number] = number
-
+            diff = target - number
+            if diff in numbers_set:
+                combinations.append((number,diff))
+            else:
+                numbers_set.add(number)
         if combinations:
             return combinations
         else:
             return 'No combination found'
 
-    return 'Empty list' 
-
-print(two_num_sum([1, 2, 1000], 3))
+    return 'Empty list'
+            
+print(two_num_sum([-3, 1, 2, 4, 6, 8], 5))
